@@ -1,0 +1,13 @@
+<div ng-show="tweetsBox.show">
+  <br />
+  <h2>These are the lastest {{tweetsBox.about}}!!!</h2>
+  <ul class="list-group">
+    <div ng-repeat="t in tweetsBox.tweets">
+      <li class="list-group-item">
+        <span class="badge glyphicon glyphicon-heart"> {{t._source.favorite_count}}</span>
+        <a href="https://twitter.com/{{t._source.user.screen_name}}" target="_blank">@{{t._source.user.screen_name}}</a>: {{t._source.text}}
+      </li>
+    </div>
+  </ul>
+  <h6>Last time updated: {{tweetsBox.lastUpdate}}</h6>
+</div>

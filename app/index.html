@@ -1,0 +1,50 @@
+<!doctype html>
+<html ng-app="poopApp">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="poopApp.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>Elastic Tweet</h1>
+        <p class="lead">I'm gonna steal all your tweets mother foca.</p>
+      </div>
+      <div ng-controller="TweetController as tweet">
+        <div class="row">
+          <div class="col-md-6">
+            <h4>Add new tweet:</h4>
+            <form ng-submit="tweet.addTweet()">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <input class="btn btn-default" type="submit" value="New Tweet">
+                </span>
+                <input type="text" class="form-control" aria-describedby="basic-addon1" ng-model="tweet.tweetText"  size="30" placeholder="Add new tweet here">
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <h4>Display tweets:</h4>
+            <input type="text" class="form-control" aria-describedby="basic-addon1" ng-model="tweet.customSearch"  size="30" placeholder="Custom search">
+            <br>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary" ng-click="tweet.showTweets('retweet_count', 0, 'No Retweets')">No Retweets</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-success" ng-click="tweet.showTweets('text', 'Nintendo', 'Nintendo')">Nintendo</button>
+              </div>
+              <div class="btn-group" role="group">
+                <button type="button" class="btn btn-danger" ng-click="tweet.showTweets('text', tweet.customSearch, 'Custom')">Custom</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div show-alert></div>
+        <div show-tweets-box></div>
+      </div>
+    </div>
+  </body>
+</html>

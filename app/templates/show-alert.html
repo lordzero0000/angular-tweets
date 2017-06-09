@@ -1,0 +1,7 @@
+<div ng-show="alertStatus.show">
+  <br />
+  <div class="alert alert-{{alertStatus.type}} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="utilsOnScope.hideAlert()"><span aria-hidden="true">&times;</span></button>
+    {{alertStatus.text}}
+  </div>
+</div>

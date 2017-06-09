@@ -1,0 +1,19 @@
+{
+  "name": "callthreads",
+  "version": "1.0.0",
+  "description": "just calling threas",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "elasticsearch": "^13.0.1",
+    "express": "^4.15.2",
+    "request": "^2.81.0",
+    "twitter": "^1.7.0"
+  }
+}
