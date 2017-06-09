@@ -1,5 +1,5 @@
 angular.module('poopApp', [])
-  .controller('TweetController', ['$scope', '$http', function($scope, $http) {
+  .controller('TweetController', ['$scope', '$http', 'requestService', function($scope, $http, requestService) {
     let _self = this
         tweetUrl = 'http://localhost:3000/tweet'
 
@@ -7,12 +7,6 @@ angular.module('poopApp', [])
       show: false,
       text: 'KAKAROTTO',
       type: 'success'
-    }
-
-    $scope.utilsOnScope = {
-      hideAlert: function() {
-        $scope.alertStatus.show = false
-      }
     }
 
     $scope.tweetsBox = {
@@ -23,7 +17,7 @@ angular.module('poopApp', [])
     }
 
     _self.addTweet = function() {
-      $http.post(tweetUrl, {
+      requestService.post(tweetUrl, {
         tweet: _self.tweetText
       }).then(function(response) {
         _self.tweetText = ''
@@ -41,7 +35,7 @@ angular.module('poopApp', [])
     }
 
     _self.showTweets = function(q, v, about) {
-      $http.get(`${tweetUrl}?q=${q}&v=${v}`)
+      requestService.get(tweetUrl, `q=${q}&v=${v}`)
       .then(function (response) {
         $scope.tweetsBox.show = true
         $scope.tweetsBox.tweets = response.data.hits.hits
@@ -58,14 +52,45 @@ angular.module('poopApp', [])
       })
     }
   }])
-  .directive('showTweetsBox', function() {
+  .directive('showPoop', function() {
     return {
+      scope: {
+        poop: "=show"
+      },
+      template: '<h1>{{$scope.poop}}&#128169;</h1>'
+    }
+  })
+  .directive('showBox', function() {
+    return {
+      scope: {
+        showBox: "="
+      },
       templateUrl: 'templates/show-tweets-box.html'
     }
   })
   .directive('showAlert', function() {
     return {
+      scope: {
+        showAlert: "="
+      },
+      controller: ['$scope', function ($scope) {
+        let _self = this
+
+        _self.hideAlert = function() {
+          $scope.showAlert = false
+        }
+      }],
       templateUrl: 'templates/show-alert.html'
+    }
+  })
+  .factory('requestService', function($http) {
+    return {
+      post: function (url, obj) {
+        return $http.post(url, obj)
+      },
+      get: function (url, query) {
+        return $http.get(`${url}?${query}`)
+      }
     }
   })
 
