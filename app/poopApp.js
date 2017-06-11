@@ -44,7 +44,7 @@ angular.module('poopApp', [])
         console.log(response.data)
       })
       .catch(function (err) {
-        let errorMsg = (response.data.error.msg) ? response.data.error.msg : 'Cannot get information of the tweet.'
+        let errorMsg = (err.data.error.msg) ? err.data.error.msg : 'Cannot get information of the tweet.'
         $scope.alertStatus.show = true
         $scope.alertStatus.text = `ERROR: ${errorMsg}`
         $scope.alertStatus.type = 'danger'
@@ -52,32 +52,24 @@ angular.module('poopApp', [])
       })
     }
   }])
-  .directive('showPoop', function() {
+  .directive('showTweetsBox', function() {
     return {
+      restrict: 'E',
       scope: {
-        poop: "=show"
-      },
-      template: '<h1>{{$scope.poop}}&#128169;</h1>'
-    }
-  })
-  .directive('showBox', function() {
-    return {
-      scope: {
-        showBox: "="
+        showTweets: "=displayTweets"
       },
       templateUrl: 'templates/show-tweets-box.html'
     }
   })
   .directive('showAlert', function() {
     return {
+      restric: 'E',
       scope: {
-        showAlert: "="
+        showAlertBox: "=displayAlert"
       },
       controller: ['$scope', function ($scope) {
-        let _self = this
-
-        _self.hideAlert = function() {
-          $scope.showAlert = false
+        $scope.hideAlert = function() {
+          $scope.showAlertBox.show = false
         }
       }],
       templateUrl: 'templates/show-alert.html'

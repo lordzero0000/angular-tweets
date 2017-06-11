@@ -1,7 +1,7 @@
-<div ng-show="showAlert">
+<div ng-show="showAlertBox.show">
   <br />
-  <div class="alert alert-{{alertStatus.type}} alert-dismissible" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="hideAlert()"><span aria-hidden="true">&times;</span></button>
-    {{alertStatus.text}}
+  <div class="alert alert-{{showAlertBox.type}} alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="this.hideAlert()"><span aria-hidden="true">&times;</span></button>
+    {{showAlertBox.text}}
   </div>
 </div>
